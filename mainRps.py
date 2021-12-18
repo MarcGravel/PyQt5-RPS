@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QFont, QPixmap
 
 class Window(QWidget):
     def __init__(self):
@@ -10,6 +11,36 @@ class Window(QWidget):
     
     #function to create UI widgets    
     def UI(self):
+        ####Labels####
+        self.playerLabel = QLabel("Your Score: ", self)
+        self.playerLabel.move(30, 20)
+        self.playerLabel.setFont(QFont("Helvetica", 16))
+        
+        self.computerLabel = QLabel("Computer Score: ", self)
+        self.computerLabel.move(320, 20)
+        self.computerLabel.setFont(QFont("Helvetica", 16))
+        
+        versusLabel = QLabel("VS", self)
+        versusLabel.move(240, 150)
+        versusLabel.setFont(QFont("Helvetica", 25))
+        
+        ####Images####
+        self.playerImage = QLabel(self)
+        self.playerImage.setPixmap(QPixmap("images/rock.png").scaledToWidth(150))
+        self.playerImage.move(30, 100)
+        
+        self.computerImage = QLabel(self)
+        self.computerImage.setPixmap(QPixmap("images/rock.png").scaledToWidth(150))
+        self.computerImage.move(340, 100)
+        
+        ###Buttons###
+        startBtn = QPushButton("Start", self)
+        startBtn.move(180, 300)
+        startBtn.setFont(QFont("Arial", 13))
+        
+        stopBtn = QPushButton("Stop", self)
+        stopBtn.move(260, 300)
+        stopBtn.setFont(QFont("Arial", 13))
         
         #####show#####
         self.show()
