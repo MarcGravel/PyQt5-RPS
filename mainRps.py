@@ -54,11 +54,6 @@ class Window(QWidget):
         stopBtn.setFont(QFont("Arial", 13))
         stopBtn.clicked.connect(self.stopGame)
         
-        ###Win Message###
-        self.winMessage = QLabel("Test", self)
-        self.winMessage.move(200, 350)
-        self.winMessage.setFont(QFont("Helvetica", 40))
-        
         ####Timer####
         self.timer = QTimer(self)
         self.timer.setInterval(60)
@@ -90,6 +85,36 @@ class Window(QWidget):
     def stopGame(self):
         self.timer.stop()
         
+        if (self.randomPlayerInt == 1 and self.randomComputerInt == 2):
+            self.startingComputerScore += 1
+            self.computerLabel.setText("Computer Score: "+ str(self.startingComputerScore))
+        elif (self.randomPlayerInt == 1 and self.randomComputerInt == 3):
+            self.startingPlayerScore += 1
+            self.playerLabel.setText("Your Score: "+ str(self.startingPlayerScore))
+        elif (self.randomPlayerInt == 2 and self.randomComputerInt == 3):
+            self.startingComputerScore += 1
+            self.computerLabel.setText("Computer Score: "+ str(self.startingComputerScore))
+        elif (self.randomPlayerInt == 2 and self.randomComputerInt == 1):
+            self.startingPlayerScore += 1
+            self.playerLabel.setText("Your Score: "+ str(self.startingPlayerScore))
+        elif (self.randomPlayerInt == 3 and self.randomComputerInt == 1):
+            self.startingComputerScore += 1
+            self.computerLabel.setText("Computer Score: "+ str(self.startingComputerScore))
+        elif (self.randomPlayerInt == 3 and self.randomComputerInt == 2):
+            self.startingPlayerScore += 1
+            self.playerLabel.setText("Your Score: "+ str(self.startingPlayerScore))
+        
+        if (self.startingPlayerScore == 5 or self.startingComputerScore == 5):
+            
+            if (self.startingPlayerScore == 5):
+                mbox = QMessageBox.information(self, "Winner", "You Win!")
+            else:
+                mbox = QMessageBox.information(self, "Loser", "You Lose")
+                
+            self.startingComputerScore = 0
+            self.computerLabel.setText("Computer Score: "+ str(self.startingComputerScore))
+            self.startingPlayerScore = 0
+            self.playerLabel.setText("Your Score: "+ str(self.startingPlayerScore))
     
 def main():
     App = QApplication(sys.argv)
