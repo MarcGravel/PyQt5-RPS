@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont, QPixmap
+from PyQt5.QtCore import QTimer
 
 class Window(QWidget):
     def __init__(self):
@@ -37,13 +38,29 @@ class Window(QWidget):
         startBtn = QPushButton("Start", self)
         startBtn.move(180, 300)
         startBtn.setFont(QFont("Arial", 13))
+        startBtn.clicked.connect(self.startGame)
         
         stopBtn = QPushButton("Stop", self)
         stopBtn.move(260, 300)
         stopBtn.setFont(QFont("Arial", 13))
+        stopBtn.clicked.connect(self.stopGame)
+        
+        ####Timer####
+        self.timer = QTimer(self)
+        self.timer.setInterval(1000)
+        self.timer.timeout(self.playing)
         
         #####show#####
         self.show()
+    
+    def startGame(self):
+        self.timer.start()
+    
+    def stopGame(self):
+        self.timer.stop()
+    
+    def playing(self):
+        pass
         
 def main():
     App = QApplication(sys.argv)
